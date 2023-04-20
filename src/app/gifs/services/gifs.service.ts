@@ -15,8 +15,8 @@ export class GifsService {
     private _tagsHistory: string[] = [];
 
     constructor(private http: HttpClient) { //! apuntes todo lo relacionado con este modulo
-        //this.loadLocalStorage();
-        console.log('Gifs Service Ready');
+       
+        this.loadLocalStorage();
     }
 
     get tagsHistory() {
@@ -32,9 +32,23 @@ export class GifsService {
 
         this._tagsHistory.unshift(tag);
         this._tagsHistory = this.tagsHistory.splice(0, 10);
-        //this.saveLocalStorage();
+        this.saveLocalStorage();
     }
 
+    private saveLocalStorage():void {
+        localStorage.setItem('history', JSON.stringify( this._tagsHistory))
+    }
+
+    private loadLocalStorage():void {
+        if (!localStorage.getItem('history')) return;
+
+        this._tagsHistory = JSON.parse( localStorage.getItem('history')! )
+        
+        if (this._tagsHistory.length > 0){
+
+            this.searchTag( this._tagsHistory[0] )
+        }
+    }
 
 
     searchTag(tag: string): void {
@@ -54,7 +68,5 @@ export class GifsService {
                  console.log({ gifs: this.gifList });
 
             });
-
-
     }
 }
