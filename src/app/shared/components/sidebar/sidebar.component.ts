@@ -11,9 +11,7 @@ export class SidebarComponent {
 
 constructor( private gifsService: GifsService ) { }
 
-
-//*public tagHistoryElement: string[] = this.gifsService.tagsHistory porque esto esta mal??? apuntes
-
+// mejor hacer un getter que un public
 get tagHistoryElement(): string[] {
   return this.gifsService.tagsHistory;
 }
@@ -21,6 +19,5 @@ get tagHistoryElement(): string[] {
 searchTagAgain(tag: string): void {
   this.gifsService.searchTag(tag)
 } 
-
 
 }

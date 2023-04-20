@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core'; //! apuntes de todo este servicio
+import { Injectable } from '@angular/core'; 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Gif, SearchResponse } from '../interfaces/gifs.interface';
 
-@Injectable({ //! apuntes injectable
+@Injectable({
     providedIn: 'root' // gracias a esto toda la aplicación lo usa y no hace falta proveerlo en un módulo
 })
 export class GifsService {
@@ -14,7 +14,7 @@ export class GifsService {
 
     private _tagsHistory: string[] = [];
 
-    constructor(private http: HttpClient) { //! apuntes todo lo relacionado con este modulo
+    constructor(private http: HttpClient) { 
        
         this.loadLocalStorage();
     }
@@ -56,13 +56,13 @@ export class GifsService {
         if (tag.length === 0) return;
         this.organizeHistory(tag);
 
-        const params = new HttpParams() // esto viene de JS
+        const params = new HttpParams()
             .set('api_key', this.apiKey)
             .set('limit', '10')
             .set('q', tag)
 
         this.http.get<SearchResponse>(`${this.ServiceUrl}/search`, { params })
-            .subscribe(resp => { // apuntes suscribe
+            .subscribe(resp => { 
 
                 this.gifList = resp.data;
                  console.log({ gifs: this.gifList });
