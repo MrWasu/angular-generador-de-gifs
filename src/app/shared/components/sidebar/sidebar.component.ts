@@ -18,5 +18,9 @@ get tagHistoryElement(): string[] {
   return this.gifsService.tagsHistory;
 }
 
+searchTagAgain(tag: string): void {
+  this.gifsService.searchTag(tag)
+} 
+
 
 }
